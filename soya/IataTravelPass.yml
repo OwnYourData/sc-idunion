@@ -1,0 +1,53 @@
+meta:
+  name: IataTravelPass
+
+content:
+  bases:
+    - name: VaccinationDetails
+      attributes:
+        vaccinationEvent: VaccinationEvent
+        dateOfVaccination: Date
+        doseNumber: Integer
+        countryOfVaccination: String
+        administeringCentre: String
+        vaccineBatch: String
+        nextDoseDue: Date
+
+    - name: VaccinationEvent
+      attributes:
+        personIdentification: Person
+        vaccine: String
+        brand: String
+        diseaseTarget: String
+
+    - name: Person
+      attributes:
+        name: String
+        dateOfBirth: Date
+        uniqueIdentifier: String
+        additionalIdentifiers: Array
+        sex: String
+
+  overlays: 
+    - type: OverlayTransformation
+      name: Who2IataTransformationOverlay
+      base: https://soya.data-container.net/WhoCovid19Credential
+      engine: jq
+      value: |
+        { "vaccinationEvent": {
+            "personIdentification": {
+              "name": .["header"]["name"],
+              "dateOfBirth": .["header"]["dateOfBirth"],
+              "uniqueIdentifier": .["header"]["uniqueIdentifier"]["id"],
+              "sex": .["header"]["sex"]
+            },
+            "vaccine": .["vaccinationEvent"]["vaccineOrProphylaxis"],
+            "brand": .["vaccinationEvent"]["vaccineBrand"],
+            "diseaseTarget": .["vaccinationEvent"]["diseaseTarget"]
+          },
+          "dateOfVaccination": .["vaccinationEvent"]["dateOfVaccination"],
+          "doseNumber": .["vaccinationEvent"]["doseNumber"],
+          "countryOfVaccination": .["vaccinationEvent"]["countryOfVaccination"],
+          "administeringCentre": .["vaccinationEvent"]["administeringCentre"],
+          "nextDoseDue": .["vaccinationEvent"]["nextDoseDue"]
+        }

@@ -1,0 +1,218 @@
+meta:
+  name: IDuVacCert_Archived
+
+content:
+  overlays:
+    - type: OverlayForm
+      base: https://soya.data-container.net/IDunion_VaccinationCertificate/IDunionDemonstrator/
+      name: VaccinationCertificateArchivedFormOverlay
+      schema:
+        type: object
+        properties:
+          vaccinationCertificate:
+            type: object
+            properties:
+              header:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  dateOfBirth:
+                    type: string
+                    format: date
+                  uniqueIdentifier:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      idSystem:
+                        type: string
+                    required: []
+                  sex:
+                    type: string
+                required: []
+              vaccinationEvent:
+                type: object
+                properties:
+                  vaccineOrProphylaxis:
+                    type: string
+                  vaccineBrand:
+                    type: string
+                  vaccineManufacture:
+                    type: string
+                  vaccineMarketAuthorization:
+                    type: string
+                  vaccineBatchNumber:
+                    type: string
+                  dateOfVaccination:
+                    type: string
+                    format: date
+                  doseNumber:
+                    type: string
+                  validFrom:
+                    type: string
+                    format: date
+                  totalDoses:
+                    type: string
+                  countryOfVaccination:
+                    type: string
+                  administeringCentre:
+                    type: string
+                  healthWorkerSignature:
+                    type: string
+                  healthWorkerIdentifier:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      idSystem:
+                        type: string
+                    required: []
+                  diseaseTarget:
+                    type: string
+                  nextDoseDue:
+                    type: string
+                    format: date
+                required: []
+              hcid:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  idSystem:
+                    type: string
+                required: []
+              certificateIssuer:
+                type: string
+              certificateValidFrom:
+                type: string
+                format: date
+              certificateValidUntil:
+                type: string
+                format: date
+              certificateSchemaVersion:
+                type: string
+            required: []
+          sowlInfo:
+            type: object
+            properties:
+              userId:
+                type: string
+              userEmail:
+                type: string
+              certificateIssued:
+                type: string
+                format: date-time
+              credentialOfferId:
+                type: string
+              certificateAccepted:
+                type: string
+                format: date-time
+            required: []
+          oydDatavault:
+            type: object
+            properties:
+              endpoint:
+                type: string
+              token:
+                type: string
+            required: []
+        required: []
+      ui:
+        type: VerticalLayout
+        elements:
+        - type: Group
+          label: IDunionDemonstrator
+          elements: []
+        - type: Group
+          label: VaccinationCertificate
+          elements:
+          - type: Control
+            scope: "#/properties/vaccinationCertificate/properties/certificateIssuer"
+          - type: Control
+            scope: "#/properties/vaccinationCertificate/properties/certificateValidFrom"
+          - type: Control
+            scope: "#/properties/vaccinationCertificate/properties/certificateValidUntil"
+          - type: Control
+            scope: "#/properties/vaccinationCertificate/properties/certificateSchemaVersion"
+        - type: Group
+          label: Header
+          elements:
+          - type: Control
+            scope: "#/properties/vaccinationCertificate/properties/header/properties/name"
+          - type: Control
+            scope: "#/properties/vaccinationCertificate/properties/header/properties/dateOfBirth"
+          - type: Control
+            scope: "#/properties/vaccinationCertificate/properties/header/properties/sex"
+        - type: Group
+          label: UniqueIdentifier
+          elements:
+          - type: Control
+            scope: "#/properties/vaccinationCertificate/properties/header/properties/uniqueIdentifier/properties/id"
+          - type: Control
+            scope: "#/properties/vaccinationCertificate/properties/header/properties/uniqueIdentifier/properties/idSystem"
+        - type: Group
+          label: VaccinationEvent
+          elements:
+          - type: Control
+            scope: "#/properties/vaccinationCertificate/properties/vaccinationEvent/properties/vaccineOrProphylaxis"
+          - type: Control
+            scope: "#/properties/vaccinationCertificate/properties/vaccinationEvent/properties/vaccineBrand"
+          - type: Control
+            scope: "#/properties/vaccinationCertificate/properties/vaccinationEvent/properties/vaccineManufacture"
+          - type: Control
+            scope: "#/properties/vaccinationCertificate/properties/vaccinationEvent/properties/vaccineMarketAuthorization"
+          - type: Control
+            scope: "#/properties/vaccinationCertificate/properties/vaccinationEvent/properties/vaccineBatchNumber"
+          - type: Control
+            scope: "#/properties/vaccinationCertificate/properties/vaccinationEvent/properties/dateOfVaccination"
+          - type: Control
+            scope: "#/properties/vaccinationCertificate/properties/vaccinationEvent/properties/doseNumber"
+          - type: Control
+            scope: "#/properties/vaccinationCertificate/properties/vaccinationEvent/properties/validFrom"
+          - type: Control
+            scope: "#/properties/vaccinationCertificate/properties/vaccinationEvent/properties/totalDoses"
+          - type: Control
+            scope: "#/properties/vaccinationCertificate/properties/vaccinationEvent/properties/countryOfVaccination"
+          - type: Control
+            scope: "#/properties/vaccinationCertificate/properties/vaccinationEvent/properties/administeringCentre"
+          - type: Control
+            scope: "#/properties/vaccinationCertificate/properties/vaccinationEvent/properties/healthWorkerSignature"
+          - type: Control
+            scope: "#/properties/vaccinationCertificate/properties/vaccinationEvent/properties/diseaseTarget"
+          - type: Control
+            scope: "#/properties/vaccinationCertificate/properties/vaccinationEvent/properties/nextDoseDue"
+        - type: Group
+          label: HealthWorkerIdentifier
+          elements:
+          - type: Control
+            scope: "#/properties/vaccinationCertificate/properties/vaccinationEvent/properties/healthWorkerIdentifier/properties/id"
+          - type: Control
+            scope: "#/properties/vaccinationCertificate/properties/vaccinationEvent/properties/healthWorkerIdentifier/properties/idSystem"
+        - type: Group
+          label: Hcid
+          elements:
+          - type: Control
+            scope: "#/properties/vaccinationCertificate/properties/hcid/properties/id"
+          - type: Control
+            scope: "#/properties/vaccinationCertificate/properties/hcid/properties/idSystem"
+        - type: Group
+          label: SowlInfo
+          elements:
+          - type: Control
+            scope: "#/properties/sowlInfo/properties/userId"
+          - type: Control
+            scope: "#/properties/sowlInfo/properties/userEmail"
+          - type: Control
+            scope: "#/properties/sowlInfo/properties/certificateIssued"
+          - type: Control
+            scope: "#/properties/sowlInfo/properties/credentialOfferId"
+          - type: Control
+            scope: "#/properties/sowlInfo/properties/certificateAccepted"
+        - type: Group
+          label: OydDatavault
+          elements:
+          - type: Control
+            scope: "#/properties/oydDatavault/properties/endpoint"
+          - type: Control
+            scope: "#/properties/oydDatavault/properties/token"

@@ -1,0 +1,99 @@
+meta:
+  name: IDuProof_Archived
+
+content:
+  overlays:
+    - type: OverlayForm
+      base: https://soya.data-container.net/IDunion_VaccinationProof/IDunionDemonstrator/
+      name: VaccinationProofArchiveFormOverlay
+      schema:
+        type: object
+        properties:
+          vaccinationProof:
+            type: object
+            properties:
+              header:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  dateOfBirth:
+                    type: string
+                    format: date
+                required: []
+              dateTimeOfProofRequest:
+                type: string
+                format: date-time
+              result:
+                type: boolean
+              verifier:
+                type: string
+              proofSchemaVersion:
+                type: string
+            required: []
+          sowlInfo:
+            type: object
+            properties:
+              userId:
+                type: string
+              userEmail:
+                type: string
+              proofRequested:
+                type: string
+                format: date-time
+              proofId:
+                type: string
+              proofProvided:
+                type: string
+                format: date-time
+            required: []
+          oydDatavault:
+            type: object
+            properties:
+              endpoint:
+                type: string
+              token:
+                type: string
+            required: []
+        required: []
+      ui:
+        type: VerticalLayout
+        elements:
+        - type: Group
+          label: Vaccination Proof
+          elements:
+          - type: Control
+            scope: "#/properties/vaccinationProof/properties/verifier"
+          - type: Control
+            scope: "#/properties/vaccinationProof/properties/proofSchemaVersion"
+          - type: Control
+            scope: "#/properties/vaccinationProof/properties/dateTimeOfProofRequest"
+          - type: Control
+            scope: "#/properties/vaccinationProof/properties/result"
+        - type: Group
+          label: Person
+          elements:
+          - type: Control
+            scope: "#/properties/vaccinationProof/properties/header/properties/name"
+          - type: Control
+            scope: "#/properties/vaccinationProof/properties/header/properties/dateOfBirth"
+        - type: Group
+          label: SOWL Info
+          elements:
+          - type: Control
+            scope: "#/properties/sowlInfo/properties/userId"
+          - type: Control
+            scope: "#/properties/sowlInfo/properties/userEmail"
+          - type: Control
+            scope: "#/properties/sowlInfo/properties/proofRequested"
+          - type: Control
+            scope: "#/properties/sowlInfo/properties/proofId"
+          - type: Control
+            scope: "#/properties/sowlInfo/properties/proofProvided"
+        - type: Group
+          label: OwnYourData Data-Vault
+          elements:
+          - type: Control
+            scope: "#/properties/oydDatavault/properties/endpoint"
+          - type: Control
+            scope: "#/properties/oydDatavault/properties/token"

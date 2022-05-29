@@ -1,0 +1,184 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "@import": "https://ns.ownyourdata.eu/ns/soya-context.json",
+    "@base": "https://soya.data-container.net/VaccinationCertificate2/",
+    "foaf": "http://xmlns.com/foaf/0.1/",
+    "dc": "http://purl.org/dc/elements/1.1/"
+  },
+  "@graph": [
+    {
+      "@id": "Person",
+      "label": {
+        "en": [
+          "Person"
+        ],
+        "de": [
+          "die Person",
+          "der Mensch"
+        ]
+      }
+    },
+    {
+      "@id": "name",
+      "label": {
+        "en": [
+          "Name"
+        ],
+        "de": [
+          "Name"
+        ]
+      }
+    },
+    {
+      "@id": "dateOfBirth",
+      "label": {
+        "en": [
+          "Date of Birth"
+        ],
+        "de": [
+          "Geburtsdatum"
+        ]
+      },
+      "comment": {
+        "en": [
+          "Birthdate of Person"
+        ]
+      }
+    },
+    {
+      "@id": "sex",
+      "label": {
+        "en": [
+          "Gender"
+        ],
+        "de": [
+          "Geschlecht"
+        ]
+      },
+      "comment": {
+        "en": [
+          "Gender (male or female)"
+        ],
+        "de": [
+          "Geschlecht (mÃ¤nnlich oder weiblich)"
+        ]
+      }
+    },
+    {
+      "@id": "OverlayAnnotation",
+      "@type": "OverlayAnnotation",
+      "onBase": "Person"
+    },
+    {
+      "@id": "name",
+      "classification": [
+        "pii"
+      ]
+    },
+    {
+      "@id": "dateOfBirth",
+      "classification": [
+        "pii"
+      ]
+    },
+    {
+      "@id": "sex",
+      "classification": [
+        "pii",
+        "gdpr_sensitive"
+      ]
+    },
+    {
+      "@id": "OverlayClassification",
+      "@type": "OverlayClassification",
+      "onBase": "Person"
+    },
+    {
+      "@id": "name",
+      "encoding": "UTF-8"
+    },
+    {
+      "@id": "dateOfBirth",
+      "encoding": "UTF-8"
+    },
+    {
+      "@id": "age",
+      "encoding": "UTF-8"
+    },
+    {
+      "@id": "sex",
+      "encoding": "UTF-8"
+    },
+    {
+      "@id": "OverlayEncoding",
+      "@type": "OverlayEncoding",
+      "onBase": "Person"
+    },
+    {
+      "@id": "dateOfBirth",
+      "format": "DD/MM/YYYY"
+    },
+    {
+      "@id": "OverlayFormat",
+      "@type": "OverlayFormat",
+      "onBase": "Person"
+    },
+    {
+      "@id": "name",
+      "rdfs:subPropertyOf": [
+        "foaf:name",
+        "dc:title"
+      ]
+    },
+    {
+      "@id": "sex",
+      "rdfs:subPropertyOf": [
+        "foaf:gender"
+      ]
+    },
+    {
+      "@id": "OverlayAlignment",
+      "@type": "OverlayAlignment",
+      "onBase": "Person"
+    },
+    {
+      "@id": "PersonShape",
+      "@type": "sh:NodeShape",
+      "sh:targetClass": "Person",
+      "sh:property": [
+        {
+          "sh:path": "name",
+          "sh:minCount": 1,
+          "sh:maxCount": 1,
+          "sh:maxLength": 20,
+          "sh:pattern": "/^[A-Za-z ,.'-]+$/i"
+        },
+        {
+          "sh:path": "dateOfBirth",
+          "sh:minCount": 1,
+          "sh:maxCount": 1,
+          "sh:minRange": {
+            "@type": "xsd:date",
+            "@value": "1900-01-01"
+          }
+        },
+        {
+          "sh:path": "age",
+          "sh:maxCount": 1
+        },
+        {
+          "sh:path": "sex",
+          "sh:maxCount": 1,
+          "sh:in": {
+            "@list": [
+              "male",
+              "female"
+            ]
+          }
+        }
+      ],
+      "onBase": "Person"
+    }
+  ]
+}

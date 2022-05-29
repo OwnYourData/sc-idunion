@@ -1,0 +1,36 @@
+meta:
+  name: IDunion_VaccinationProof
+
+content:
+  bases:
+    - name: IDunionDemonstrator
+      attributes:
+        vaccinationProof: VaccinationProof
+        sowlInfo: SWOLinfo 
+        oydDatavault: OYDdatavault
+
+    - name: VaccinationProof
+      attributes:
+        header: Person
+        dateTimeOfProofRequest: datetime
+        result: boolean
+        verifier: string
+        proofSchemaVersion: String
+    
+    - name: Person
+      attributes:
+        name: String
+        dateOfBirth: Date
+
+    - name: SWOLinfo
+      attributes:
+        userId: string
+        userEmail: string
+        proofRequested: datetime
+        proofId: string
+        proofProvided: datetime
+
+    - name: OYDdatavault
+      attributes:
+        endpoint: string
+        token: string

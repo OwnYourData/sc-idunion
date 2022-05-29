@@ -1,0 +1,143 @@
+meta:
+  name: IDunionIssuerInfo
+
+content:
+  bases: 
+    - name: IDunionIssuerInfo
+      attributes:
+        name: IssuerDescription
+        usage_policy: UsagePolicy
+        endpoints: IssuerEndpoints
+
+    - name: IssuerDescription
+      attributes:
+        title: string
+        description: string
+        contact: string
+        dataRequest: string
+
+    - name: UsagePolicy
+      attributes:
+        user_compatible: boolean
+        match_error: string
+        personalData: string
+        purpose: string
+        processing: string
+        recipient: string
+        location: string
+        expiryTime: datetime
+        technicalMeasure: string
+        organisationalMeasure: string
+        legalBasis: string
+        risk: string
+
+    - name: IssuerEndpoints
+      attributes:
+        usagepolicy_endpoint: string
+        info_endpoint: string
+        apply_endpoint: string
+
+  overlays: 
+    - type: OverlayForm
+      base: IDunionIssuerInfo
+      name: IDunionIssuerInfoFormOverlay
+      schema:
+        type: object
+        properties:
+          name:
+            type: object
+            properties:
+              title:
+                type: string
+              description:
+                type: string
+              contact:
+                type: string
+              dataRequest:
+                type: string
+            required: []
+          usage_policy:
+            type: object
+            properties:
+              user_compatible:
+                type: boolean
+              match_error:
+                type: string
+              personalData:
+                type: string
+              purpose:
+                type: string
+              processing:
+                type: string
+              recipient:
+                type: string
+              location:
+                type: string
+              expiryTime:
+                type: string
+              technicalMeasure:
+                type: string
+              organisationalMeasure:
+                type: string
+              legalBasis:
+                type: string
+              risk:
+                type: string
+            required: []
+          endpoints:
+            type: object
+            properties:
+              usagepolicy_endpoint:
+                type: string
+              info_endpoint:
+                type: string
+              apply_endpoint:
+                type: string
+            required: []
+        required: []
+      ui:
+        type: VerticalLayout
+        elements:
+        - type: Group
+          label: Issuer Information
+          elements: []
+        - type: Group
+          label: Name
+          elements:
+          - type: Control
+            scope: "#/properties/name/properties/title"
+          - type: Control
+            scope: "#/properties/name/properties/description"
+          - type: Control
+            scope: "#/properties/name/properties/contact"
+          - type: Control
+            scope: "#/properties/name/properties/dataRequest"
+        - type: Group
+          label: Usage Policy
+          elements:
+          - type: Control
+            scope: "#/properties/usage_policy/properties/user_compatible"
+          - type: Control
+            label: Description of Usage Policy Matching
+            scope: "#/properties/usage_policy/properties/match_error"
+          - type: Control
+            label: Personal Data Categories
+            scope: "#/properties/usage_policy/properties/personalData"
+          - type: Control
+            scope: "#/properties/usage_policy/properties/purpose"
+          - type: Control
+            scope: "#/properties/usage_policy/properties/processing"
+          - type: Control
+            scope: "#/properties/usage_policy/properties/recipient"
+          - type: Control
+            scope: "#/properties/usage_policy/properties/location"
+          - type: Control
+            scope: "#/properties/usage_policy/properties/expiryTime"
+          - type: Control
+            scope: "#/properties/usage_policy/properties/technicalMeasure"
+          - type: Control
+            scope: "#/properties/usage_policy/properties/organisationalMeasure"
+          - type: Control
+            scope: "#/properties/usage_policy/properties/legalBasis"
+          - type: Control
+            scope: "#/properties/usage_policy/properties/risk"

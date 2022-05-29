@@ -1,0 +1,35 @@
+docker rm -f issuer
+docker run -d -e SOWL_TENANT_ID=17934 -e SOWL_VCAPP_ID=49331 -e SOWL_VCAPP_SECRET=b9gzVgLdb3_mPJG0qvrTzMux8pyF3NPQb9yc06SmKYA -e SOWL_VCDEF_ID=48445 -e SOWL_PRFTMPL_ID=47627 --name issuer -p 4500:3000 semcon/sc-idunion
+
+curl -X POST http://localhost:4500/api/new_vaccination
+
+https://databud.ownyourdata.unterholzer.dev/?APP_KEY=4e002bad37b96507eac9f5b1f4f81e9813d65461ff8d82a954afb63fe7b35d65&APP_SECRET=db313784dc8d3b5c750099de53a668aa2da68ad978230c503590f163649f8d06&PIA_URL=https%3A%2F%2Fidunion-issuer.data-container.net
+
+export APP_KEY=7509b6d86591c4e354c649e6b9bde323cd9fab9c456727c2f3ba2960efd309ba; export APP_SECRET=097a8c0beb0365309460ec7b368a34d139f74818bfc12143019286ef86cb6a97; export TOKEN=`curl -s -d grant_type=client_credentials -d client_id=$APP_KEY -d client_secret=$APP_SECRET -d scope=admin -X POST https://idunion-issuer.data-container.net/oauth/token | jq -r '.access_token'`
+
+curl -H "Content-Type: application/json" -H "Authorization: Bearer $TOKEN" -X GET https://idunion-issuer.data-container.net/api/info
+
+echo '{"content":{"key": "oauth", "value": "{\"authority\": \"https://auth-ssi-demo.esatus.com/.well-known/openid-configuration?tenant=17934\",\"client_id\": \"23183\",\"scope\": \"openid\",\"response_type\": \"id_token\",\"redirect_uri\": \"http://localhost:3000/signin-oidc\",\"title\": {\"en\":\"Login with SOWL\", \"de\":\"mit SOWL einloggen\", \"pic\":\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=\"},\"application_id\": 2}"}, "schema_dri": "4ktjMzvwbhAeGM8Dwu67VcCnuJc52K3fVdq7V1qCPWLw"}' | curl -H "Content-Type: application/json" -H "Authorization: Bearer $TOKEN" -d @- -X POST https://idunion-issuer.data-container.net/api/data
+
+
+
+echo '{"content":{"key":"oauth","value":"{\"authority\": \"https://auth-ssi-demo.esatus.com/.well-known/openid-configuration?tenant=17934\",\"client_id\": \"23183\",\"scope\": \"openid\",\"response_type\": \"id_token\",\"redirect_uri\": \"http://localhost:3000/signin-oidc\",\"title\": {\"en\":\"Login with SOWL\", \"de\":\"mit SOWL einloggen\", \"pic\":\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=\"},\"application_id\": 2}"}, "schema_dri": "zQmVXrH8ZwrKKTKXeZVjAprWhwMNHn2q6SiwBwvbdXj2sTz"}' | curl -H "Content-Type: application/json" -H "Authorization: Bearer $TOKEN" -d @- -X POST https://idunion-issuer.data-container.net/api/data
+
+Doorkeeper::Application.new(name: "oidc_app", redirect_uri: "urn:ietf:wg:oauth:2.0:oob", scopes: "admin write read", confidential: false, sc_query: nil, oidc_identifier: "23183", oidc_secret: "lzdysrq2sOZgVpJuSWDaVZXRGXf6prVDjxcdqxsVT6U", oidc_token_endpoint: "https://auth-ssi-demo.esatus.com/services/idp/oidc/token").save
+
+echo '{"content":{"certificateIssuer":"Demo","certificateValidFrom":"2022-04-10Z00:00:00T","certificateValidUntil":"2022-04-20Z00:00:00T","certificateSchemaVersion":"1.0","header":{"name":"John Doe","dateOfBirth":"2000-01-01Z00:00:00T","sex":"male","uniqueIdentifier":{"id":"0000000101","idSystem":"SVNR"}},"vaccinationEvent":{"vaccineOrProphylaxis":"Covid-19 Vaccine","vaccineBrand":"Comirnaty","vaccineManufacture":"Biontech","vaccineMarketAuthorization":"MoH","vaccineBatchNumber":"1","dateOfVaccination":"2022-04-06Z00:00:00T","doseNumber":"1","validFrom":"2022-04-10Z00:00:00T","totalDoses":"2","countryOfVaccination":"Austria","administeringCentre":"Ordi","healthWorkerSignature":"ABC","diseaseTarget":"Covid-19","nextDoseDue":"2022-04-20Z00:00:00T","healthWorkerIdentifier":{"id":"1234700101","idSystem":"SVNR"}},"hcid":{"id":"56678700101","idSystem":"SVNR"}}, "schema_dri": "zQmQwYxYDevNz8oUvLH3Yfx9XJQSFERAj4MHW2Jw3Zf5cnD"}' | curl -H "Content-Type: application/json" -H "Authorization: Bearer $TOKEN" -d @- -X POST https://idunion-issuer.data-container.net/api/data
+
+echo '{"content":"did:oyd:zQmP9bhtpd6CGC52hbYNsYtAoGrHaUhx2dM4WKdt8Y4raaC", "dri":"did_qr"}' | curl -H "Content-Type: application/json" -H "Authorization: Bearer $TOKEN" -d @- -X POST https://idunion-issuer.data-container.net/api/data
+
+curl -H "Authorization: Bearer $TOKEN" -X PUT https://idunion-issuer.data-container.net/api/update_vaccination/3
+
+curl -H "Authorization: Bearer $TOKEN"-X POST https://idunion-issuer.data-container.net/api/new_vaccination 
+
+=============
+
+docker rm -f verifier
+docker run -d -e SOWL_TENANT_ID=17934 -e SOWL_VCAPP_ID=49331 -e SOWL_VCAPP_SECRET=b9gzVgLdb3_mPJG0qvrTzMux8pyF3NPQb9yc06SmKYA -e SOWL_VCDEF_ID=48445 --name verifier -p 4500:3000 semcon/sc-idunion
+
+export APP_KEY=7d7bd106ee8c00e56e70798110ed1683f4088110928cfe8a2e49067260c0c9b1; export APP_SECRET=d52f4320698a4e4f959a2fa4e2d07ba58695c8ae2e284cc235d7179773810bfb; export TOKEN=`curl -s -d grant_type=client_credentials -d client_id=$APP_KEY -d client_secret=$APP_SECRET -d scope=admin -X POST https://idunion-verifier.data-container.net/oauth/token | jq -r '.access_token'`
+
+curl -H "Content-Type: application/json" -H "Authorization: Bearer $TOKEN" -X GET https://idunion-verifier.data-container.net/api/info

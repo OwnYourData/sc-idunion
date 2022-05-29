@@ -1,0 +1,61 @@
+{
+  "endpoint": {
+    "url": null,
+    "clientId": "dev.unterholzer.ownyourdata.databud.view",
+    "credentials": {
+      "appKey": null,
+      "appSecret": null
+    }
+  },
+  "settings": {
+    "actions": {
+      "qrConnectIssuer": {
+        "title": "QR Connect",
+        "url": "/qr",
+        "method": "OPEN"
+      },
+      "schedulerIssuer": {
+        "title": "Trigger Scheduler (Issuer)",
+        "url": "{{base_url}}/api/scheduler/zQmUXLZUuWYCaNnxw4si2Sf3orzhpdgZGTKHPYoRPiQuoM5",
+        "usesAuth": true,
+        "method": "GET"
+      },
+      "schedulerVerifier": {
+        "title": "Trigger Scheduler (Verifier)",
+        "url": "{{base_url}}/api/scheduler/zQmVnxNKzSzyHF81dnK3tgegsJ7vVHhmGtZyAY1TKkTNrFR",
+        "usesAuth": true,
+        "method": "GET"
+      }
+    },
+    "additionalListActions": {
+      "vaccination": {
+        "method": "POST",
+        "usesAuth": true,
+        "title": "New Vaccination",
+        "url": "{{base_url}}/api/new_vaccination"
+      },
+      "proof": {
+        "method": "POST",
+        "usesAuth": true,
+        "title": "New Vaccination Proof",
+        "url": "{{base_url}}/api/new_proof"
+      }
+    },
+    "additionalFormActions": {
+      "vaccination": {
+        "method": "PUT",
+        "usesAuth": true,
+        "title": "Vaccinate",
+        "schemaDri": "zQmdNpyqL6eoSKUZzzq6M67imS5pgLw6iEWvFH55PUNDNVk",
+        "url": "{{base_url}}/api/update_vaccination/{{item_id}}"
+      },
+      "proof": {
+        "method": "PUT",
+        "usesAuth": true,
+        "title": "Request",
+        "schemaDri": "zQmU6W9rbZyQh9tVAbCxKMjMNpg9DSpE2V8bbYbsVagYav5",
+        "url": "{{base_url}}/api/update_proof/{{item_id}}"
+      }
+    }
+  }
+}

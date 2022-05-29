@@ -1,0 +1,63 @@
+meta:
+  name: IDunion_VaccinationCertificate
+
+content:
+  bases:
+    - name: IDunionDemonstrator
+      attributes:
+        vaccinationCertificate: VaccinationCertificate
+        sowlInfo: SWOLinfo 
+        oydDatavault: OYDdatavault
+
+    - name: VaccinationCertificate
+      attributes:
+        header: Person
+        vaccinationEvent: VaccinationEvent
+        hcid: Identifier
+        certificateIssuer: String
+        certificateValidFrom: Date
+        certificateValidUntil: Date
+        certificateSchemaVersion: String
+
+    - name: Identifier
+      attributes:
+        id: String
+        idSystem: String
+    
+    - name: Person
+      attributes:
+        name: String
+        dateOfBirth: Date
+        uniqueIdentifier: Identifier
+        sex: String
+
+    - name: VaccinationEvent
+      attributes: 
+        vaccineOrProphylaxis: String
+        vaccineBrand: String
+        vaccineManufacture: String
+        vaccineMarketAuthorization: String
+        vaccineBatchNumber: String
+        dateOfVaccination: Date
+        doseNumber: Integer
+        validFrom: Date
+        totalDoses: Integer
+        countryOfVaccination: String
+        administeringCentre: String
+        healthWorkerSignature: base64binary
+        healthWorkerIdentifier: Identifier
+        diseaseTarget: String
+        nextDoseDue: Date
+
+    - name: SWOLinfo
+      attributes:
+        userId: string
+        userEmail: string
+        certificateIssued: datetime
+        credentialOfferId: string
+        certificateAccepted: datetime
+
+    - name: OYDdatavault
+      attributes:
+        endpoint: string
+        token: string

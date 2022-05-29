@@ -1,0 +1,36 @@
+meta:
+  name: VerificationInfo
+
+content:
+  bases: 
+    - name: VerificationInfo
+      attributes:
+        name: VerifierDescription
+        usage_policy: UsagePolicy
+        endpoints: VerifierEndpoints
+
+    - name: VerifierDescription
+      attributes:
+        title: string
+        description: string
+        contact: string
+        dataRequest: string
+
+    - name: UsagePolicy
+      attributes:
+        personalData: string
+        purpose: string
+        processing: string
+        recipient: string
+        location: string
+        expiryTime: datetime
+        technicalMeasure: string
+        organisationalMeasure: string
+        legalBasis: string
+        risk: string
+
+    - name: VerifierEndpoints
+      attributes:
+        usagepolicy_endpoint: string
+        info_endpoint: string
+        apply_endpoint: string

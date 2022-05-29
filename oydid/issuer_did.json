@@ -1,0 +1,5 @@
+{
+  "usagePolicy":"https://idunion-issuer.data-container.net/api/meta/usage",
+  "info": "https://idunion-issuer.data-container.net/api/vaccination_info",
+  "connect": "https://idunion-issuer.data-container.net/api/vaccination_apply"
+}

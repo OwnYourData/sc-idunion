@@ -1,0 +1,42 @@
+{
+  "endpoint": {
+    "url": null,
+    "clientId": "dev.unterholzer.ownyourdata.databud.view",
+    "credentials": {
+      "appKey": null,
+      "appSecret": null
+    }
+  },
+  "settings": {
+    "actions": {
+      "qrConnectIssuer": {
+        "title": "QR Connect",
+        "url": "/qr",
+        "method": "OPEN"
+      },
+      "schedulerVerifier": {
+        "title": "Trigger Scheduler",
+        "url": "{{base_url}}/api/scheduler/zQmVnxNKzSzyHF81dnK3tgegsJ7vVHhmGtZyAY1TKkTNrFR",
+        "usesAuth": true,
+        "method": "GET"
+      }
+    },
+    "additionalListActions": {
+      "proof": {
+        "method": "POST",
+        "usesAuth": true,
+        "title": "New Vaccination Proof",
+        "url": "{{base_url}}/api/new_proof"
+      }
+    },
+    "additionalFormActions": {
+      "proof": {
+        "method": "PUT",
+        "usesAuth": true,
+        "title": "Request",
+        "schemaDri": "zQmU6W9rbZyQh9tVAbCxKMjMNpg9DSpE2V8bbYbsVagYav5",
+        "url": "{{base_url}}/api/update_proof/{{item_id}}"
+      }
+    }
+  }
+}

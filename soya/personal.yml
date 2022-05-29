@@ -1,0 +1,13 @@
+meta:
+  name: Personal
+
+content:
+  bases: 
+    - name: Personal
+      attributes:
+        name: String
+        dateOfBirth: Date
+        sex: String
+        svnr: String
+        userEmail: String
+        

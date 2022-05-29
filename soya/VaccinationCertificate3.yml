@@ -1,0 +1,166 @@
+meta:
+  name: VaccinationCertificate3
+  namespace:
+    foaf: "http://xmlns.com/foaf/0.1/"
+    dc: "http://purl.org/dc/elements/1.1/"
+
+content:
+  bases: 
+    - name: VaccinationCertificate
+      attributes:
+        header: Person
+        vaccinationEvent: VaccinationEvent
+        hcid: ID
+        certificateIssuer: String
+        certificateValidFrom: Date
+        certificateValidUntil: Date
+        certificateSchemaVersion: String
+    
+    - name: ID
+      attributes:
+        id: String
+        idSystem: String
+    
+    - name: Person
+      attributes:
+        name: String
+        dateOfBirth: Date
+        uniqueIdentifier: ID
+        sex: String
+
+    - name: VaccinationEvent
+      attributes: 
+        vaccineOrProphylaxis: String
+        vaccineBrand: String
+        vaccineManufacture: String
+        vaccineMarketAuthorization: String
+        vaccineBatchNumber: String
+        dateOfVaccination: Date
+        doseNumber: Integer
+        validFrom: Date
+        totalDoses: Integer
+        countryOfVaccination: String
+        administeringCentre: String
+        healthWorkerSignature: base64binary
+        healthWorkerIdentifier: ID
+        diseaseTarget: String
+        nextDoseDue: Date
+
+  overlays: 
+    - type: OverlayAnnotation
+      base: Person
+      class: 
+        label: 
+          en: Person
+          de: 
+            - die Person
+            - der Mensch
+      attributes:
+        name: 
+          label: 
+            en: Name
+            de: Name
+        dateOfBirth: 
+          label: 
+            en: Date of Birth 
+            de: Geburtsdatum
+          comment: 
+            en: Birthdate of Person
+        sex: 
+          label: 
+            en: Gender
+            de: Geschlecht
+          comment: 
+            en: Gender (male or female)
+            de: Geschlecht (mÃ¤nnlich oder weiblich)
+
+    - type: OverlayValidation
+      base: Person
+      class: 
+      attributes:
+        name: 
+          cardinality: "1..1"
+          length: "[0..20]"
+          pattern: "/^[A-Za-z ,.'-]+$/i"
+        dateOfBirth:
+          cardinality: "1..1"
+          valueRange: "[1900-01-01..*]"                    
+        age: 
+          cardinality: "0..1"
+          valueRange: "[0..*]"
+        sex:
+          cardinality: "0..1"
+          valueOption:
+            - male
+            - female
+
+    - type: OverlayForm
+      base: VaccinationCertificate
+      name: VaccinationCertificateFormOverlay
+      ui:
+        type: VerticalLayout
+        elements:
+        - type: Group
+          label: VaccinationCertificate
+          elements:
+          - type: Control
+            scope: "#/properties/hcid"
+          - type: Control
+            scope: "#/properties/certificateIssuer"
+            options:
+              multi: true
+          - type: Control
+            scope: "#/properties/certificateValidFrom"
+          - type: Control
+            scope: "#/properties/certificateValidUntil"
+          - type: Control
+            scope: "#/properties/certificateSchemaVersion"
+        - type: Group
+          label: Header
+          elements:
+          - type: Control
+            scope: "#/properties/header/properties/name"
+            label: Name
+          - type: Control
+            scope: "#/properties/header/properties/dateOfBirth"
+            label: Date of Birth
+            description: Birthdate of Person
+          - type: Control
+            scope: "#/properties/header/properties/uniqueIdentifier"
+          - type: Control
+            scope: "#/properties/header/properties/sex"
+            label: Gender
+            description: Gender (male or female)
+        - type: Group
+          label: VaccinationEvent
+          elements:
+          - type: Control
+            scope: "#/properties/vaccinationEvent/properties/vaccineOrProphylaxis"
+          - type: Control
+            scope: "#/properties/vaccinationEvent/properties/vaccineBrand"
+          - type: Control
+            scope: "#/properties/vaccinationEvent/properties/vaccineManufacture"
+          - type: Control
+            scope: "#/properties/vaccinationEvent/properties/vaccineMarketAuthorization"
+          - type: Control
+            scope: "#/properties/vaccinationEvent/properties/vaccineBatchNumber"
+          - type: Control
+            scope: "#/properties/vaccinationEvent/properties/dateOfVaccination"
+          - type: Control
+            scope: "#/properties/vaccinationEvent/properties/doseNumber"
+          - type: Control
+            scope: "#/properties/vaccinationEvent/properties/validFrom"
+          - type: Control
+            scope: "#/properties/vaccinationEvent/properties/totalDoses"
+          - type: Control
+            scope: "#/properties/vaccinationEvent/properties/countryOfVaccination"
+          - type: Control
+            scope: "#/properties/vaccinationEvent/properties/administeringCentre"
+          - type: Control
+            scope: "#/properties/vaccinationEvent/properties/healthWorkerSignature"
+          - type: Control
+            scope: "#/properties/vaccinationEvent/properties/healthWorkerIdentifier"
+          - type: Control
+            scope: "#/properties/vaccinationEvent/properties/diseaseTarget"
+          - type: Control
+            scope: "#/properties/vaccinationEvent/properties/nextDoseDue"

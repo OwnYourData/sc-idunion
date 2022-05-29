@@ -1,0 +1,21 @@
+{
+  "dpv:hasPersonalData": [
+    "dpv:Health"
+  ],
+  "dpv:hasPurpose": [
+    "dpv:ServiceProvision"
+  ],
+  "dpv:hasProcessing": [
+    "dpv:Collect",
+    "dpv:Processing",
+    "dpv:Store"
+  ],
+  "dpv:hasLocation": "dpv:Location",
+  "dpv:hasRecipient": "dpv:Recipient",
+  "dpv:hasLegalBasis": [
+    "dpv:LegitimateInterest",
+    "dpv:EnterIntoContract",
+    "dpv:PublicInterest"
+  ],
+  "dpv:hasExpiryTime": "2024-04-22T00:00:00"
+}

@@ -1,0 +1,8 @@
+export APP_KEY=HsmaboGnCGZVvvZOGBKTtq9gRwT3jGA9dwpwMidCKN8
+export APP_SECRET=Fq4F1AgrN8U4YYI3F2f_P2j0Peb0WcTDIoxVMOBBxfQ
+export TOKEN=`curl -s -d grant_type=client_credentials -d client_id=$APP_KEY -d client_secret=$APP_SECRET -X POST https://data-vault.eu/oauth/token | jq -r '.access_token'`
+
+curl -H "Content-Type: application/json" -H "Authorization: Bearer $TOKEN" -X GET "https://data-vault.eu/api/data/1993430?p=id&f=plain" | soya transform IataTravelPass
+
+
+curl -H "Content-Type: application/json" -H "Authorization: Bearer $TOKEN" -X GET "https://data-vault.eu/api/data/1993750?p=id&f=full"

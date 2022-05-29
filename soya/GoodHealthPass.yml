@@ -1,0 +1,51 @@
+meta:
+  name: GoodHealthPass
+
+content:
+  bases:
+    - name: VaccinationCredential
+      attributes:
+        recipient: Person
+        disease: String
+        vaccine: String
+        productName: String
+        cvxCode: String
+        marketingAuthorizationHolder: String
+        doseNumber: Integer
+        dosesPerCycle: Integer
+        dateOfVaccination: Date
+        stateOfVaccination: String
+        countryOfVaccination: String
+        certificateIssuer: String
+        certificateNumber: Number
+
+    - name: Person
+      attributes:
+        givenName: String
+        middleName: String
+        familyName: String
+        birthDate: Date
+        photo: Binary
+
+  overlays: 
+    - type: OverlayTransformation
+      name: GoodHealthPassTransformationOverlay
+      base: https://soya.data-container.net/WhoCovid19Credential
+      engine: jq
+      value: |
+        { "recipient": {
+            "givenName": (.["header"]["name"] | split(" ")[0]),
+            "middleName": "",
+            "familyName": (.["header"]["name"] | split(" ")[1]),
+            "birthDate": .["header"]["dateOfBirth"]
+          },
+          "disease": .["vaccinationEvent"]["diseaseTarget"],
+          "vaccine": .["vaccinationEvent"]["vaccineOrProphylaxis"],
+          "productName": .["vaccinationEvent"]["vaccineBrand"],
+          "marketingAuthorizationHolder": .["vaccinationEvent"]["vaccineMarketAuthorization"],
+          "doseNumber": .["vaccinationEvent"]["doseNumber"],
+          "dosesPerCycle": .["vaccinationEvent"]["totalDoses"],
+          "dateOfVaccination": .["vaccinationEvent"]["dateOfVaccination"],
+          "countryOfVaccination": .["vaccinationEvent"]["countryOfVaccination"],
+          "certificateIssuer": .["certificateIssuer"]
+        }

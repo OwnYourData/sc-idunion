@@ -1,0 +1,23 @@
+{
+  "hasPersonalData": [
+    "dpv:Health"
+  ],
+  "hasPurpose": [
+    "dpv:ServiceProvision",
+    "dpv:CommercialInterest"
+  ],
+  "hasProcessing": [
+    "dpv:Collect",
+    "dpv:Processing",
+    "dpv:Store",
+    "dpv:AutomatedDecisionMaking",
+    "dpv:Combine"
+  ],
+  "hasLocation": [
+    "dpv-soya:AUT"
+  ],
+  "hasLegalBasis": [
+    "dpv:LegitimateInterest"
+  ],
+  "hasExpiryTime": "2025-04-22T00:00:00Z"
+}

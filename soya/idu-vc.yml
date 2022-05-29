@@ -1,0 +1,13 @@
+meta:
+  name: IDunionVaccinationCertificate
+
+content:
+  base: 
+    - name: idunion
+      attributes:
+        idu_user: string
+        data-vault: string
+        data-vault_user: string
+        data-vault_token: string
+        process_status: integer
+        vc: VaccinationCertificate

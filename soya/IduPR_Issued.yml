@@ -1,0 +1,55 @@
+meta:
+  name: IDuProof_Issued
+
+content:
+  overlays:
+    - type: OverlayForm
+      base: https://soya.data-container.net/IDunion_VaccinationProof/IDunionDemonstrator/
+      name: VaccinationProofIssuedFormOverlay
+      schema:
+        type: object
+        properties:
+          vaccinationProof:
+            type: object
+            properties:
+              header:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    maxLength: 40
+                    pattern: "^[A-Za-z ,.'-]+$"
+                  dateOfBirth:
+                    type: string
+                    format: date
+                required: []
+          sowlInfo:
+            type: object
+            properties:
+              userEmail:
+                type: string
+              proofId:
+                type: string
+              proofRequested:
+                type: string
+                format: date-time
+        required: []
+      ui:
+        type: VerticalLayout
+        elements:
+        - type: Group
+          label: Person
+          elements:
+          - type: Control
+            scope: "#/properties/vaccinationProof/properties/header/properties/name"
+          - type: Control
+            scope: "#/properties/vaccinationProof/properties/header/properties/dateOfBirth"
+        - type: Group
+          label: Zertifikats-Anfrage
+          elements:
+          - type: Control
+            label: SOWL User Email
+            scope: "#/properties/sowlInfo/properties/userEmail"
+          - type: Control
+            label: gesendet
+            scope: "#/properties/sowlInfo/properties/proofRequested"
