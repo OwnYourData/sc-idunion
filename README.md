@@ -1,6 +1,7 @@
 # Semantic Container: IDunion
 
-Description here...
+The IDunion Semantic Container implements interfaces for SOWL to allow issuing and verifying credentials. Additionally, it provides helper functions to connect to the OwnYourData Data Vault. More information about the project can be found here: https://www.OwnYourData.eu/idunion
+
 
 ## Improve the IDunion Semantic container
 
